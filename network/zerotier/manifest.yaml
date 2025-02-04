@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: zerotier
+  version: "$VERSION"
+  author: Rob C
+  description: |
+    ZeroTier is a smart programmable Ethernet switch for planet Earth.
+    It allows all networked devices, VMs, containers, and applications to communicate
+    as if they all reside in the same physical data center or cloud region.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"

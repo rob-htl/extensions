@@ -1,0 +1,38 @@
+name: zerotier
+depends:
+- service: cri
+- network:
+  - addresses
+  - connectivity
+  - etcfiles
+- configuration: true
+container:
+  entrypoint: /usr/local/bin/zerotier-one
+  environment:
+  - PATH=/sbin:/usr/local/bin
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  ## Required for networking tools
+  - source: /sbin
+    destination: /sbin
+    type: bind
+    options:
+    - bind
+    - ro
+  ## Required for ZeroTier to create its virtual network interface
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+    - bind
+    - rw
+  ## ZeroTier state and configuration storage
+  - source: /var/lib/zerotier-one
+    destination: /var/lib/zerotier-one
+    type: bind
+    options:
+    - bind
+    - rw
+restart: always
